@@ -1,6 +1,7 @@
 
 set(UTILS_SOURCES
     config_tools.cpp
+    faces_reader.cpp
     groups_manager.cpp
     model_index_utils.cpp
     painter_helpers.cpp
@@ -18,6 +19,7 @@ set(UTILS_SOURCES
 
 set(UTILS_HEADERS
     config_tools.hpp
+    faces_reader.hpp
     groups_manager.hpp
     model_index_utils.hpp
     painter_helpers.hpp
