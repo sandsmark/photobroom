@@ -23,6 +23,8 @@
 #include <database/photo_types.hpp>
 #include <database/idatabase.hpp>
 
+#include "faces_reader.hpp"
+
 struct ICoreFactoryAccessor;
 
 class PeopleManipulator: public QObject
@@ -30,7 +32,7 @@ class PeopleManipulator: public QObject
         Q_OBJECT
 
     public:
-        PeopleManipulator(const Photo::Id &, Database::IDatabase &, ICoreFactoryAccessor &);
+        PeopleManipulator(const Photo::Data &, Database::IDatabase &, ICoreFactoryAccessor &);
         ~PeopleManipulator();
 
         std::size_t facesCount() const;
@@ -57,9 +59,10 @@ class PeopleManipulator: public QObject
         };
 
         safe_callback_ctrl m_callback_ctrl;
+        FacesReader m_facesReader;
         std::vector<FaceInfo> m_faces;
         OrientedImage m_image;
-        Photo::Id m_pid;
+        Photo::Data m_data;
         ICoreFactoryAccessor& m_core;
         Database::IDatabase& m_db;
 

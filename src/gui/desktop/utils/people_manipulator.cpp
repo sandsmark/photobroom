@@ -17,6 +17,7 @@
 
 #include "people_manipulator.hpp"
 
+#include <functional>
 #include <QFileInfo>
 
 #include <core/containers_utils.hpp>
@@ -25,6 +26,9 @@
 #include <core/task_executor_utils.hpp>
 #include <database/ibackend.hpp>
 #include <face_recognition/face_recognition.hpp>
+
+
+using namespace std::placeholders;
 
 
 template<typename T>
@@ -56,13 +60,14 @@ namespace
 }
 
 
-
-PeopleManipulator::PeopleManipulator(const Photo::Id& pid, Database::IDatabase& db, ICoreFactoryAccessor& core)
-    : m_pid(pid)
+PeopleManipulator::PeopleManipulator(const Photo::Data& data, Database::IDatabase& db, ICoreFactoryAccessor& core)
+    : m_facesReader(db, core)
+    , m_data(data)
     , m_core(core)
     , m_db(db)
 {
-    findFaces();
+    m_image = OrientedImage(m_core.getExifReaderFactory()->get(), data.path);
+    m_facesReader.get(m_data, queued_slot(this, &PeopleManipulator::findFaces_result));
 }
 
 
@@ -140,8 +145,7 @@ void PeopleManipulator::findFaces_thrd()
 {
     QVector<QRect> result;
 
-    const QString path = pathFor(m_pid);
-    const QFileInfo pathInfo(path);
+    const QFileInfo pathInfo(m_data.path);
     const QString full_path = pathInfo.absoluteFilePath();
     m_image = OrientedImage(m_core.getExifReaderFactory()->get(), full_path);
 
@@ -173,7 +177,7 @@ void PeopleManipulator::findFaces_result(const QVector<QRect>& faces)
     std::copy(faces.cbegin(), faces.cend(), std::back_inserter(m_faces));
 
     for (auto& face: m_faces)
-        face.face.ph_id = m_pid;
+        face.face.ph_id = m_data.id;
 
     recognizeFaces();
 }
@@ -341,7 +345,7 @@ void PeopleManipulator::store_people_information()
 std::vector<QRect> PeopleManipulator::fetchFacesFromDb() const
 {
     return evaluate<std::vector<QRect>(Database::IBackend &)>
-        (&m_db, [id = m_pid](Database::IBackend& backend)
+        (&m_db, [id = m_data.id](Database::IBackend& backend)
     {
         std::vector<QRect> faces;
 
@@ -358,7 +362,7 @@ std::vector<QRect> PeopleManipulator::fetchFacesFromDb() const
 std::vector<PersonInfo> PeopleManipulator::fetchPeopleFromDb() const
 {
     return evaluate<std::vector<PersonInfo>(Database::IBackend &)>
-        (&m_db, [id = m_pid](Database::IBackend& backend)
+        (&m_db, [id = m_data.id](Database::IBackend& backend)
     {
         auto people = backend.peopleInformationAccessor().listPeople(id);
 
