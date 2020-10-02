@@ -19,15 +19,14 @@ class FacesReader
         FacesReader(Database::IDatabase &, ICoreFactoryAccessor &);
         ~FacesReader();
 
-        void get(const Photo::Id &, const std::function<void(QVector<QRect>)> &);
+        void get(const Photo::Data &, const std::function<void(QVector<QRect>)> &);
 
     private:
         safe_callback_ctrl m_callback_ctrl;
         ICoreFactoryAccessor& m_core;
         Database::IDatabase& m_db;
 
-        QVector<QRect> findFaces(const Photo::Id &);
-        QString pathFor(const Photo::Id &) const;
+        QVector<QRect> findFaces(const Photo::Data &);
         std::vector<QRect> fetchFacesFromDb(const Photo::Id &) const;
 };
 

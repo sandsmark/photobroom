@@ -37,10 +37,10 @@ FacesReader::~FacesReader()
 }
 
 
-void FacesReader::get(const Photo::Id& id, const std::function<void (QVector<QRect>)>& callback)
+void FacesReader::get(const Photo::Data& data, const std::function<void (QVector<QRect>)>& callback)
 {
-    auto safe_callback = m_callback_ctrl.make_safe_callback([this, id, callback]{
-        const auto faces = findFaces(id);
+    auto safe_callback = m_callback_ctrl.make_safe_callback([this, data, callback]{
+        const auto faces = findFaces(data);
         callback(faces);
     });
 
@@ -50,16 +50,15 @@ void FacesReader::get(const Photo::Id& id, const std::function<void (QVector<QRe
 }
 
 
-QVector<QRect> FacesReader::findFaces(const Photo::Id& id)
+QVector<QRect> FacesReader::findFaces(const Photo::Data& data)
 {
     QVector<QRect> result;
 
-    const QString path = pathFor(id);
-    const QFileInfo pathInfo(path);
+    const QFileInfo pathInfo(data.path);
     const QString full_path = pathInfo.absoluteFilePath();
     const OrientedImage image = OrientedImage(m_core.getExifReaderFactory()->get(), full_path);
 
-    const std::vector<QRect> list_of_faces = fetchFacesFromDb(id);
+    const std::vector<QRect> list_of_faces = fetchFacesFromDb(data.id);
 
     if (list_of_faces.empty())
     {
@@ -77,18 +76,6 @@ QVector<QRect> FacesReader::findFaces(const Photo::Id& id)
     }
 
     return result;
-}
-
-
-QString FacesReader::pathFor(const Photo::Id& id) const
-{
-    return evaluate<QString(Database::IBackend &)>(&m_db, [id, db = &m_db](Database::IBackend &)
-    {
-        Database::IUtils& db_utils = db->utils();
-        auto photo = db_utils.getPhotoFor(id);
-
-        return photo->getPath();
-    });
 }
 
 
