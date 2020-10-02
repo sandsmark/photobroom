@@ -135,41 +135,6 @@ void PeopleManipulator::runOnThread(void (PeopleManipulator::*method)())
 }
 
 
-void PeopleManipulator::findFaces()
-{
-    runOnThread(&PeopleManipulator::findFaces_thrd);
-}
-
-
-void PeopleManipulator::findFaces_thrd()
-{
-    QVector<QRect> result;
-
-    const QFileInfo pathInfo(m_data.path);
-    const QString full_path = pathInfo.absoluteFilePath();
-    m_image = OrientedImage(m_core.getExifReaderFactory()->get(), full_path);
-
-    const std::vector<QRect> list_of_faces = fetchFacesFromDb();
-
-    if (list_of_faces.empty())
-    {
-        FaceRecognition face_recognition(&m_core);
-        const auto faces = face_recognition.fetchFaces(full_path);
-
-        for(const QRect& face: faces)
-            result.append(face);
-    }
-    else
-    {
-        result.reserve(static_cast<int>(list_of_faces.size()));
-
-        std::copy(list_of_faces.cbegin(), list_of_faces.cend(), std::back_inserter(result));
-    }
-
-    invokeMethod(this, &PeopleManipulator::findFaces_result, result);
-}
-
-
 void PeopleManipulator::findFaces_result(const QVector<QRect>& faces)
 {
     m_faces.reserve(faces.size());
@@ -447,16 +412,4 @@ PersonName PeopleManipulator::storeNewPerson(const QString& name) const
     });
 
     return person;
-}
-
-
-QString PeopleManipulator::pathFor(const Photo::Id& id) const
-{
-    return evaluate<QString(Database::IBackend &)>(&m_db, [id, db = &m_db](Database::IBackend &)
-    {
-        Database::IUtils& db_utils = db->utils();
-        auto photo = db_utils.getPhotoFor(id);
-
-        return photo->getPath();
-    });
 }

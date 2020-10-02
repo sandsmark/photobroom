@@ -68,8 +68,6 @@ class PeopleManipulator: public QObject
 
         void runOnThread(void (PeopleManipulator::*)());
 
-        void findFaces();
-        void findFaces_thrd();
         void findFaces_result(const QVector<QRect> &);
 
         void recognizeFaces();
@@ -90,7 +88,6 @@ class PeopleManipulator: public QObject
         std::vector<PersonName> fetchPeople() const;
         PersonName personData(const Person::Id& id) const;
         PersonName storeNewPerson(const QString& name) const;
-        QString pathFor(const Photo::Id& id) const;
 };
 
 #endif // PEOPLEMANIPULATOR_HPP
