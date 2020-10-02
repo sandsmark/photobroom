@@ -39,8 +39,9 @@ FacesReader::~FacesReader()
 
 void FacesReader::get(const Photo::Id& id, const std::function<void (QVector<QRect>)>& callback)
 {
-    auto safe_callback = m_callback_ctrl.make_safe_callback([]{
-
+    auto safe_callback = m_callback_ctrl.make_safe_callback([this, id, callback]{
+        const auto faces = findFaces(id);
+        callback(faces);
     });
 
     auto executor = m_core.getTaskExecutor();
@@ -49,7 +50,7 @@ void FacesReader::get(const Photo::Id& id, const std::function<void (QVector<QRe
 }
 
 
-void FacesReader::findFaces(const Photo::Id& id)
+QVector<QRect> FacesReader::findFaces(const Photo::Id& id)
 {
     QVector<QRect> result;
 
@@ -74,6 +75,8 @@ void FacesReader::findFaces(const Photo::Id& id)
 
         std::copy(list_of_faces.cbegin(), list_of_faces.cend(), std::back_inserter(result));
     }
+
+    return result;
 }
 
 

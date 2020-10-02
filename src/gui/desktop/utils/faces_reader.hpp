@@ -26,7 +26,7 @@ class FacesReader
         ICoreFactoryAccessor& m_core;
         Database::IDatabase& m_db;
 
-        void findFaces(const Photo::Id &);
+        QVector<QRect> findFaces(const Photo::Id &);
         QString pathFor(const Photo::Id &) const;
         std::vector<QRect> fetchFacesFromDb(const Photo::Id &) const;
 };
