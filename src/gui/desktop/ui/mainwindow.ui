@@ -94,6 +94,7 @@
      <string>Tools</string>
     </property>
     <addaction name="actionSeries_detector"/>
+    <addaction name="actionFace_detector"/>
    </widget>
    <addaction name="menuCollection"/>
    <addaction name="menuPhotos"/>
@@ -215,6 +216,11 @@
   <action name="actionSeries_detector">
    <property name="text">
     <string>Series detector</string>
+   </property>
+  </action>
+  <action name="actionFace_detector">
+   <property name="text">
+    <string>Face detector</string>
    </property>
   </action>
  </widget>

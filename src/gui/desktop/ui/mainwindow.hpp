@@ -116,6 +116,7 @@ class MainWindow: public QMainWindow
 
         // tools menu
         void on_actionSeries_detector_triggered();
+        void on_actionFace_detector_triggered();
 
         // settings menu
         void on_actionConfiguration_triggered();

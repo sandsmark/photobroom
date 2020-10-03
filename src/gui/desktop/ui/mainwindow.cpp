@@ -611,6 +611,12 @@ void MainWindow::on_actionSeries_detector_triggered()
 }
 
 
+void MainWindow::on_actionFace_detector_triggered()
+{
+
+}
+
+
 void MainWindow::on_actionConfiguration_triggered()
 {
     m_configDialogManager->run();
