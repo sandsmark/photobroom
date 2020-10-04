@@ -62,7 +62,7 @@ Item {
         cellHeight: 70
     }
 
-    Component.ThumbnailSlider {
+    Components.ThumbnailSlider {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
     }
@@ -72,6 +72,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:2}
+    D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/
