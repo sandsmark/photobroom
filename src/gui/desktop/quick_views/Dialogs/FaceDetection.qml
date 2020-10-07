@@ -5,10 +5,36 @@ import "../Components" as Components
 Item {
     GridView {
         id: guessedFaces
-        height: cellHeight + 30
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
+
+        state: "empty"
+
+        states: [
+            State {
+                name: "empty"
+                when: guessedFaces.model.count === 0
+
+                PropertyChanges {
+                    target: guessedFaces
+                    height: 0
+                }
+            },
+            State {
+                name: "nonempty"
+                when: guessedFaces.model.count !== 0
+
+                PropertyChanges {
+                    target: guessedFaces
+                    height: cellHeight + 30
+                }
+            }
+        ]
+
+        transitions: Transition {
+            PropertyAnimation { properties: "height"; easing.type: Easing.InOutQuad; duration: 200 }
+        }
     }
 
     GridView {
