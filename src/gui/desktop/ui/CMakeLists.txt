@@ -31,8 +31,8 @@ set(UI_FILES
 
 source_group(files REGULAR_EXPRESSION .*gui.* )
 
-qt5_wrap_cpp(MOCED ${TO_MOC})
-qt5_wrap_ui(WRAPPED_UI ${UI_FILES})
+qt6_wrap_cpp(MOCED ${TO_MOC})
+qt6_wrap_ui(WRAPPED_UI ${UI_FILES})
 
 add_library(gui_ui OBJECT ${SRC} ${MOCED} ${WRAPPED_UI} ${HEADERS})
 set_target_properties(gui_ui PROPERTIES POSITION_INDEPENDENT_CODE ON)

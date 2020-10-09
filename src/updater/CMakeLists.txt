@@ -26,7 +26,7 @@ set(TO_MOC
     implementation/updater_impl.hpp
     )
 
-qt5_wrap_cpp(MOCED ${TO_MOC})
+qt6_wrap_cpp(MOCED ${TO_MOC})
 
 add_library(updater ${SRCS} ${MOCED} ${HEADERS})
 target_link_libraries(updater PRIVATE github_api Qt::Network)

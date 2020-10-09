@@ -22,7 +22,7 @@ set(TO_MOC
     connection.hpp
     )
 
-qt5_wrap_cpp(MOCED ${TO_MOC})
+qt6_wrap_cpp(MOCED ${TO_MOC})
 
 add_library(github_api ${SRCS} ${MOCED} ${HEADERS})
 target_link_libraries(github_api PRIVATE

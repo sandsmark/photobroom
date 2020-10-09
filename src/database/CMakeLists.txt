@@ -68,7 +68,7 @@ set(DATABASE_MOC
     photo_data.hpp
 )
 
-qt5_wrap_cpp(DATABASE_MOCED ${DATABASE_MOC})
+qt6_wrap_cpp(DATABASE_MOCED ${DATABASE_MOC})
 
 stringify_enums(STRINGIFIED_ENUMS database_status.hpp)
 

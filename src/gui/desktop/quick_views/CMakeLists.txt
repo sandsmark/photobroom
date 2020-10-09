@@ -5,11 +5,11 @@ find_package(Qt6 REQUIRED COMPONENTS
 )
 
 # consider https://doc.qt.io/QtQuickCompiler/ in case of load performance problems
-qt5_add_resources(QML_RESOURCES
+qt6_add_resources(QML_RESOURCES
                     resources.qrc
 )
 
-qt5_wrap_cpp(MOCED
+qt6_wrap_cpp(MOCED
                 photo_item.hpp
                 photos_model_controller_component.hpp
                 qml_setup.hpp
