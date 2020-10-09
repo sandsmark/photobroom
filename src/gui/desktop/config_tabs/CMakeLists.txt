@@ -38,7 +38,6 @@ target_link_libraries(gui_config_tabs
                         PRIVATE
                             core
                             Qt::Widgets
-                            ${OPENLIBRARY_LIBRARIES}
 )
 
 target_include_directories(gui_config_tabs
