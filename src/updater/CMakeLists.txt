@@ -1,7 +1,7 @@
 
 add_subdirectory(github_api)
 
-find_package(Qt5 REQUIRED COMPONENTS Network)
+find_package(Qt6 REQUIRED COMPONENTS Network)
 
 include(GenerateExportHeader)
 

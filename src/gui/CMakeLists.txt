@@ -1,5 +1,5 @@
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets QuickControls2)
+find_package(Qt6 REQUIRED COMPONENTS Widgets QuickControls2)
 find_package(OpenLibrary 2.2 REQUIRED QtExt)
 
 include(GenerateExportHeader)

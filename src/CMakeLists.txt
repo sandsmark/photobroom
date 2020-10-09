@@ -18,7 +18,7 @@ if(BUILD_UPDATER)
 endif()
 
 find_package(OpenLibrary REQUIRED)
-find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
 set(BROOM_SOURCES main.cpp
     $<TARGET_OBJECTS:plugins>

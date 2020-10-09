@@ -5,7 +5,7 @@ find_program(WGET wget)
 if(BUILD_LEARNING_TESTS AND WGET)
 
     find_package(GTest REQUIRED CONFIG)
-    find_package(Qt5 REQUIRED COMPONENTS Core Gui)
+    find_package(Qt6 REQUIRED COMPONENTS Core Gui)
 
     # download two fake faces from https://thispersondoesnotexist.com
     add_custom_command(OUTPUT face1.jpg face2.jpg
