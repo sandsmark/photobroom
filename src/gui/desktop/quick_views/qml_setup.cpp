@@ -13,6 +13,6 @@ void register_qml_types()
     qmlRegisterType<PhotoItem>("photo_broom.qml", 1, 0, "Photo");
     qmlRegisterType<PhotosModelControllerComponent>("photo_broom.qml", 1, 0, "PhotosModelController");
     qmlRegisterType<SelectionManagerComponent>("photo_broom.qml", 1, 0, "SelectionManager");
-    qmlRegisterInterface<IThumbnailsManager>("IThumbnailsManager");
-    qmlRegisterInterface<FlatModel>("FlatModel");
+    qmlRegisterInterface<IThumbnailsManager>("IThumbnailsManager", 1);
+    qmlRegisterInterface<FlatModel>("FlatModel", 1);
 }
