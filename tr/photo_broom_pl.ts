@@ -412,7 +412,7 @@ Jego postęp widoczny będzie w panelu &quot;Operacje&quot;.</numerusform>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/desktop/ui/mainwindow.cpp" line="+213"/>
+        <location filename="../src/gui/desktop/ui/mainwindow.cpp" line="+214"/>
         <source>New version</source>
         <translation>Nowa wersja</translation>
     </message>

@@ -32,6 +32,7 @@
 #include "config_tabs/main_tab.hpp"
 #include "config_tabs/tools_tab.hpp"
 #include "models/flat_model.hpp"
+#include "widgets/face_detection/face_detection.hpp"
 #include "widgets/project_creator/project_creator_dialog.hpp"
 #include "widgets/series_detection/series_detection.hpp"
 #include "widgets/collection_dir_scan_dialog.hpp"
@@ -613,7 +614,7 @@ void MainWindow::on_actionSeries_detector_triggered()
 
 void MainWindow::on_actionFace_detector_triggered()
 {
-
+    FaceDetection().exec();
 }
 
 
