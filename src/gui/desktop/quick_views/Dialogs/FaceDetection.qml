@@ -5,11 +5,15 @@ import "../Components" as Components
 Item {
     GridView {
         id: guessedFaces
+        objectName: "guessedFaces"
+
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
 
         state: "empty"
+
+        model: {}
 
         states: [
             State {
@@ -39,6 +43,8 @@ Item {
 
     GridView {
         id: unknownFaces
+        objectName: "unknownFaces"
+
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: guessedFaces.bottom
@@ -63,27 +69,7 @@ Item {
                 spacing: 5
             }
         }
-        model: ListModel {
-            ListElement {
-                name: "Grey"
-                colorCode: "grey"
-            }
-
-            ListElement {
-                name: "Red"
-                colorCode: "red"
-            }
-
-            ListElement {
-                name: "Blue"
-                colorCode: "blue"
-            }
-
-            ListElement {
-                name: "Green"
-                colorCode: "green"
-            }
-        }
+        model: {}
         cellWidth: 70
         cellHeight: 70
     }

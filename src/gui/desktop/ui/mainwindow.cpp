@@ -614,7 +614,7 @@ void MainWindow::on_actionSeries_detector_triggered()
 
 void MainWindow::on_actionFace_detector_triggered()
 {
-    FaceDetection().exec();
+    FaceDetection(*m_currentPrj->getDatabase()).exec();
 }
 
 
