@@ -30,8 +30,8 @@
 #include <QTimer>
 #include <QDoubleSpinBox>
 
-#include <kratingwidget.h>
-#include <kcolorcombo.h>
+// #include <kratingwidget.h>
+// #include <kcolorcombo.h>
 
 #include <core/base_tags.hpp>
 #include <core/down_cast.hpp>
@@ -114,12 +114,12 @@ QWidget* EditorFactory::createEditor(const TagTypeInfo& info, QWidget* parent)
             break;
 
         case TagTypes::Rating:
-            result = new KRatingWidget(parent);
+            //result = new KRatingWidget(parent);
             break;
 
         case TagTypes::Category:
         {
-            KColorCombo* combo = new KColorCombo(parent);
+            //KColorCombo* combo = new KColorCombo(parent);
             IModelCompositorDataSource* model = m_completerFactory->accessModel(TagTypes::Category);
             const QStringList& colorsList = model->data();
 
@@ -131,9 +131,9 @@ QWidget* EditorFactory::createEditor(const TagTypeInfo& info, QWidget* parent)
                 colors.push_back(color);
             }
 
-            combo->setColors(colors);
+            //combo->setColors(colors);
 
-            result = combo;
+            //result = combo;
             break;
         }
 

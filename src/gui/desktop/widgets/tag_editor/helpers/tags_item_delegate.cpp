@@ -24,7 +24,7 @@
 #include <QLineEdit>
 #include <QPainter>
 
-#include <kratingpainter.h>
+// #include <kratingpainter.h>
 
 #include "ui_utils/ieditor_factory.hpp"
 #include "utils/variant_display.hpp"
@@ -91,8 +91,8 @@ void TagsItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opti
         {
             const QVariant value = index.data(Qt::EditRole);
 
-            if (value.isNull() == false)
-                KRatingPainter().paint(painter, option.rect, value.toInt());
+            //if (value.isNull() == false)
+            //    KRatingPainter().paint(painter, option.rect, value.toInt());
         }
         else if (tagType == TagTypes::Category)
         {
