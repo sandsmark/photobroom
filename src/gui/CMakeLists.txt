@@ -60,6 +60,8 @@ target_link_libraries(gui
                             project_utils
                             system
 
+                            KWidgetsAddons
+                            ${OPENLIBRARY_LIBRARIES}
                             Qt::Widgets
                             Qt::QuickControls2
 )
